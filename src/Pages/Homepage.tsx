@@ -1,7 +1,11 @@
+import { Herosection } from "../components/section/Herosection";
+
 const Homepage = () =>{
     return(
         <>
-        หน้าแรก
+        <div>
+            <Herosection/>
+        </div>
         </>
     )
 }

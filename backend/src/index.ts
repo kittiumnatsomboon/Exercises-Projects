@@ -1,8 +1,10 @@
 import express, { Application, Request, Response } from 'express';
-
+import  router  from "./api/query"
 const app: Application = express();
 const PORT = 3000;
 
+
+app.use('/query',router)
 app.get('/', (req: Request, res: Response) => {
   res.json({message:"HELLOWORLD"})
 });

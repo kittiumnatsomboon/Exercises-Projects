@@ -1,6 +1,6 @@
 // src/components/ThemeSwitch.tsx
 import React from 'react';
-import { useTheme } from './ThemeContext.tsx';
+import { useTheme } from './Themecontext';
 
 const ThemeSwitch = () => {
   const { theme, toggleTheme } = useTheme();

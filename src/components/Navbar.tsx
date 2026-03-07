@@ -6,12 +6,12 @@ const Navbar = () => {
     return (
         <>
             <div
-                className="absolute top-0 left-0 z-40 flex items-center w-full bg-transparent"
+                className="fixed top-0 left-0 z-40 flex items-center w-full bg-transparent dark:bg-black"
             >
                 <div className="container px-4 mx-auto">
-                    <div className="relative flex items-center justify-between -mx-4">
-                        <div className="max-w-full px-4 w-60">
-                            <Link to="/" className="block w-full py-5 navbar-logo">
+                    <div className="relative flex items-center justify-between-mx-4">
+                        <div className="max-w-full px-4 w-60 text-black">
+                            <Link to="/" className="block w-full py-5 navbar-logo ">
                                 <img
                                     src="./images/logo/logo-white.svg"
                                     alt="logo"
@@ -154,7 +154,9 @@ const Navbar = () => {
                     </div>
                 </div>
             </div >
+            <main className="pt-24">
             <Outlet />
+            </main>
         </>
     )
 }

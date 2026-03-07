@@ -1,7 +1,10 @@
 const About = () =>{
     return(
         <>
-        about
+        <div className="dark:bg-black">
+            about
+
+        </div>
         </>
     )
 }

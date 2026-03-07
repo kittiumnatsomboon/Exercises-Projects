@@ -13,11 +13,16 @@ datasource db {
   provider = "mysql"
 }
 
+enum Role{
+  staff
+  admin
+}
+
 model users{
   userid Int @id @default(autoincrement())
   firstname String 
   lastname String 
-  usertype String
+  usertype Role @default(staff) 
   email String
   password String
   created_at DateTime @default(now())

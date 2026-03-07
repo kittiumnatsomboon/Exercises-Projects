@@ -13,20 +13,35 @@ datasource db {
   provider = "mysql"
 }
 
-enum Role{
+enum Role {
   staff
   admin
 }
 
-model users{
-  userid Int @id @default(autoincrement())
-  firstname String 
-  lastname String 
-  usertype Role @default(staff) 
-  email String
-  password String
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now())
-  deleted_at DateTime
+enum Status {
+  open
+  inprogress
+  cancel
+  resolved
 }
 
+model User {
+  userid      Int         @id @default(autoincrement())
+  firstname   String
+  lastname    String
+  usertype    Role        @default(staff)
+  email       String
+  password    String
+  exercisesid exercises[]
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @default(now())
+}
+
+model exercises {
+  exercisesid     Int    @id @default(autoincrement())
+  name            String
+  description     String
+  exersisesstatus Status
+  userid          Int
+  user            User   @relation(fields: [userid], references: [userid], onDelete: Cascade)
+}

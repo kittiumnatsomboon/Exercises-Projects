@@ -69,7 +69,7 @@ const Navbar = () => {
                                                 lg:inline-flex lg:py-6 lg:pl-0 lg:pr-4 lg:text-black 
                                                 lg:group-hover:opacity-70 xl:ml-10"
                                             >
-                                                Pages
+                                                เมนูย่อย
 
                                                 <svg
                                                     className="ml-2 fill-current"
@@ -144,22 +144,22 @@ const Navbar = () => {
 
                                 <button
                                 onClick={toggleTheme}
-                                className="px-4 py-2 rounded-lg bg-gray-800 text-white dark:text-black transition"
+                                className="px-4 py-2 rounded-lg bg-gray-800 text-white dark:text-white transition"
                                 >
-                                {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+                                {theme === "light" ? "🌙 โหมดมืด" : "☀️ สว่าง"}
                                 </button>
                                 <div className="hidden sm:flex">
                                     <Link
-                                        to="signin.html"
-                                        className="loginBtn px-[22px] py-2 text-base font-medium text-white hover:opacity-70"
+                                        to="#"
+                                        className="loginBtn px-[22px] py-2 text-base font-medium dark:text-white hover:opacity-70"
                                     >
-                                        Sign In
+                                        เข้าสู่ระบบ
                                     </Link>
                                     <Link
-                                        to="signup.html"
-                                        className="px-6 py-2 text-base font-medium text-white duration-300 ease-in-out rounded-md bg-white/20 signUpBtn hover:bg-white/100 hover:text-dark"
+                                        to="#"
+                                        className="px-6 py-2 text-base font-medium dark:text-white dark:bg-white/20 duration-300 ease-in-out rounded-md bg-black/20 signUpBtn hover:bg-white/100 hover:text-dark"
                                     >
-                                        Sign Up
+                                        สมัครสมาชิก
                                     </Link>
                                 </div>
                             </div>

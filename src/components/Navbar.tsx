@@ -1,8 +1,8 @@
 import { Link, Outlet } from "react-router-dom";
-import Switchdarklightmode from "./darkmode/Switchdarklightmode";
 import { Navbarmenu } from "../data/Navbarmenu";
+import { useTheme } from "./darkmode/Themecontext";
 const Navbar = () => {
-    
+    const { theme, toggleTheme } = useTheme();
     return (
         <>
             <div
@@ -40,7 +40,7 @@ const Navbar = () => {
                                     className="absolute right-4 top-full hidden w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none dark:lg:bg-transparent xl:px-6"
                                 >
                                     <ul className="blcok lg:flex 2xl:ml-20">
-                                        {Navbarmenu.map((items,index)=>(
+                                        {Navbarmenu.map((items, index) => (
                                             <li className="relative group" key={index}>
                                                 <Link
                                                     to={items.link}
@@ -50,7 +50,7 @@ const Navbar = () => {
                                                 </Link>
                                             </li>
                                         ))}
-                                        
+
                                         <li className="relative submenu-item group">
                                             <Link
                                                 to="javascript:void(0)"
@@ -129,27 +129,31 @@ const Navbar = () => {
                             </div>
                             <div className="flex items-center justify-end pr-16 lg:pr-0">
 
-                                <Switchdarklightmode />
-
-                            <div className="hidden sm:flex">
-                                <Link
-                                    to="signin.html"
-                                    className="loginBtn px-[22px] py-2 text-base font-medium text-white hover:opacity-70"
+                                <button
+                                onClick={toggleTheme}
+                                className="px-4 py-2 rounded-lg bg-gray-800 text-white dark:text-black transition"
                                 >
-                                    Sign In
-                                </Link>
-                                <Link
-                                    to="signup.html"
-                                    className="px-6 py-2 text-base font-medium text-white duration-300 ease-in-out rounded-md bg-white/20 signUpBtn hover:bg-white/100 hover:text-dark"
-                                >
-                                    Sign Up
-                                </Link>
+                                {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+                                </button>
+                                <div className="hidden sm:flex">
+                                    <Link
+                                        to="signin.html"
+                                        className="loginBtn px-[22px] py-2 text-base font-medium text-white hover:opacity-70"
+                                    >
+                                        Sign In
+                                    </Link>
+                                    <Link
+                                        to="signup.html"
+                                        className="px-6 py-2 text-base font-medium text-white duration-300 ease-in-out rounded-md bg-white/20 signUpBtn hover:bg-white/100 hover:text-dark"
+                                    >
+                                        Sign Up
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div >
+            </div >
             <Outlet />
         </>
     )

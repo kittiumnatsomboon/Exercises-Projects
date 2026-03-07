@@ -5,8 +5,8 @@ export const Herosection = () => {
     return (
         <div
             id="home"
-            className="relative overflow-hidden bg-blue-400 pt-[120px] md:pt-[130px] lg:pt-[160px]"
-        >
+            className="relative overflow-hidden pt-[120px] md:pt-[130px] lg:pt-[160px]
+            dark:bg-black">
             <div className="container px-4 mx-auto">
                 <div className="flex flex-wrap items-center -mx-4">
                     <div className="w-full px-4">

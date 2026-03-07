@@ -1,7 +1,9 @@
 const About = () =>{
     return(
         <>
-        about
+        <div className="pt-24">
+            HELLOWORLD
+        </div>
         </>
     )
 }

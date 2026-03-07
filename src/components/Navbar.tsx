@@ -1,26 +1,33 @@
 import { Link, Outlet } from "react-router-dom";
-import Switchdarklightmode from "./darkmode/Switchdarklightmode";
 import { Navbarmenu } from "../data/Navbarmenu";
+import { useTheme } from "./darkmode/Themecontext";
 const Navbar = () => {
-    
+    const { theme, toggleTheme } = useTheme();
     return (
         <>
             <div
-                className="absolute top-0 left-0 z-40 flex items-center w-full bg-transparent"
+                className="fixed top-0 left-0 z-40 flex items-center w-full bg-transparent dark:bg-black"
             >
                 <div className="container px-4 mx-auto">
-                    <div className="relative flex items-center justify-between -mx-4">
-                        <div className="max-w-full px-4 w-60">
+                    <div className="relative flex items-center justify-between-mx-4">
+                        <div className="max-w-full px-4 w-60 ">
                             <Link to="/" className="block w-full py-5 navbar-logo">
                                 <img
-                                    src="./images/logo/logo-white.svg"
+                                    src="./images/logo/logonavbarwhite.svg"
                                     alt="logo"
-                                    className="w-full header-logo"
+                                    className="w-full header-logo dark:hidden"
+                                    />
+
+                                <img
+                                    src="./images/logo/logonavbarblack.svg"
+                                    alt="logo"
+                                    className="hidden w-full header-logo dark:block"
                                 />
                             </Link>
                         </div>
                         <div className="flex items-center justify-between w-full px-4">
                             <div>
+                                {/* btn toggle open close responesive */}
                                 <button
                                     id="navbarToggler"
                                     className="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
@@ -37,26 +44,32 @@ const Navbar = () => {
                                 </button>
                                 <nav
                                     id="navbarCollapse"
-                                    className="absolute right-4 top-full hidden w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none dark:lg:bg-transparent xl:px-6"
+                                    className="absolute right-4 top-full hidden w-full max-w-[250px] rounded-lg bg-white  py-5 shadow-lg dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none dark:lg:bg-transparent xl:px-6"
                                 >
                                     <ul className="blcok lg:flex 2xl:ml-20">
-                                        {Navbarmenu.map((items,index)=>(
+                                        {Navbarmenu.map((items, index) => (
                                             <li className="relative group" key={index}>
                                                 <Link
                                                     to={items.link}
-                                                    className="flex py-2 mx-8 text-base font-medium ud-menu-scroll text-dark group-hover:text-primary dark:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70"
+                                                    className="flex py-2 mx-8 text-base font-medium ud-menu-scroll 
+                                                    text-dark group-hover:text-primary dark:text-white lg:mr-0 
+                                                    lg:inline-flex lg:px-0 lg:py-6 lg:text-black lg:group-hover:opacity-70"
                                                 >
                                                     {items.label}
                                                 </Link>
                                             </li>
                                         ))}
-                                        
+
                                         <li className="relative submenu-item group">
                                             <Link
                                                 to="javascript:void(0)"
-                                                className="relative flex items-center justify-between py-2 mx-8 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-8 lg:mr-0 lg:inline-flex lg:py-6 lg:pl-0 lg:pr-4 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10"
+                                                className="relative flex items-center justify-between 
+                                                py-2 mx-8 text-base font-medium text-dark 
+                                                group-hover:text-primary dark:text-white lg:ml-8 lg:mr-0 
+                                                lg:inline-flex lg:py-6 lg:pl-0 lg:pr-4 lg:text-black 
+                                                lg:group-hover:opacity-70 xl:ml-10"
                                             >
-                                                Pages
+                                                เมนูย่อย
 
                                                 <svg
                                                     className="ml-2 fill-current"
@@ -129,28 +142,34 @@ const Navbar = () => {
                             </div>
                             <div className="flex items-center justify-end pr-16 lg:pr-0">
 
-                                <Switchdarklightmode />
-
-                            <div className="hidden sm:flex">
-                                <Link
-                                    to="signin.html"
-                                    className="loginBtn px-[22px] py-2 text-base font-medium text-white hover:opacity-70"
+                                <button
+                                onClick={toggleTheme}
+                                className="px-4 py-2 rounded-lg bg-gray-800 text-white dark:text-white transition"
                                 >
-                                    Sign In
-                                </Link>
-                                <Link
-                                    to="signup.html"
-                                    className="px-6 py-2 text-base font-medium text-white duration-300 ease-in-out rounded-md bg-white/20 signUpBtn hover:bg-white/100 hover:text-dark"
-                                >
-                                    Sign Up
-                                </Link>
+                                {theme === "light" ? "🌙 โหมดมืด" : "☀️ สว่าง"}
+                                </button>
+                                <div className="hidden sm:flex">
+                                    <Link
+                                        to="#"
+                                        className="loginBtn px-[22px] py-2 text-base font-medium dark:text-white hover:opacity-70"
+                                    >
+                                        เข้าสู่ระบบ
+                                    </Link>
+                                    <Link
+                                        to="#"
+                                        className="px-6 py-2 text-base font-medium dark:text-white dark:bg-white/20 duration-300 ease-in-out rounded-md bg-black/20 signUpBtn hover:bg-white/100 hover:text-dark"
+                                    >
+                                        สมัครสมาชิก
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div >
+            </div >
+            <main className="">
             <Outlet />
+            </main>
         </>
     )
 }

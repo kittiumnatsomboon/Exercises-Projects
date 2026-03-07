@@ -1,9 +1,8 @@
 const About = () =>{
     return(
         <>
-        <div className="dark:bg-black">
-            about
-
+        <div className="pt-24">
+            HELLOWORLD
         </div>
         </>
     )

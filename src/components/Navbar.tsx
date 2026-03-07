@@ -10,17 +10,24 @@ const Navbar = () => {
             >
                 <div className="container px-4 mx-auto">
                     <div className="relative flex items-center justify-between-mx-4">
-                        <div className="max-w-full px-4 w-60 text-black">
-                            <Link to="/" className="block w-full py-5 navbar-logo ">
+                        <div className="max-w-full px-4 w-60 ">
+                            <Link to="/" className="block w-full py-5 navbar-logo">
                                 <img
-                                    src="./images/logo/logo-white.svg"
+                                    src="./images/logo/logonavbarwhite.svg"
                                     alt="logo"
-                                    className="w-full header-logo"
+                                    className="w-full header-logo dark:hidden"
+                                    />
+
+                                <img
+                                    src="./images/logo/logonavbarblack.svg"
+                                    alt="logo"
+                                    className="hidden w-full header-logo dark:block"
                                 />
                             </Link>
                         </div>
                         <div className="flex items-center justify-between w-full px-4">
                             <div>
+                                {/* btn toggle open close responesive */}
                                 <button
                                     id="navbarToggler"
                                     className="absolute right-4 top-1/2 block -translate-y-1/2 rounded-lg px-3 py-[6px] ring-primary focus:ring-2 lg:hidden"
@@ -37,14 +44,16 @@ const Navbar = () => {
                                 </button>
                                 <nav
                                     id="navbarCollapse"
-                                    className="absolute right-4 top-full hidden w-full max-w-[250px] rounded-lg bg-white py-5 shadow-lg dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none dark:lg:bg-transparent xl:px-6"
+                                    className="absolute right-4 top-full hidden w-full max-w-[250px] rounded-lg bg-white  py-5 shadow-lg dark:bg-dark-2 lg:static lg:block lg:w-full lg:max-w-full lg:bg-transparent lg:px-4 lg:py-0 lg:shadow-none dark:lg:bg-transparent xl:px-6"
                                 >
                                     <ul className="blcok lg:flex 2xl:ml-20">
                                         {Navbarmenu.map((items, index) => (
                                             <li className="relative group" key={index}>
                                                 <Link
                                                     to={items.link}
-                                                    className="flex py-2 mx-8 text-base font-medium ud-menu-scroll text-dark group-hover:text-primary dark:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70"
+                                                    className="flex py-2 mx-8 text-base font-medium ud-menu-scroll 
+                                                    text-dark group-hover:text-primary dark:text-white lg:mr-0 
+                                                    lg:inline-flex lg:px-0 lg:py-6 lg:text-black lg:group-hover:opacity-70"
                                                 >
                                                     {items.label}
                                                 </Link>
@@ -54,7 +63,11 @@ const Navbar = () => {
                                         <li className="relative submenu-item group">
                                             <Link
                                                 to="javascript:void(0)"
-                                                className="relative flex items-center justify-between py-2 mx-8 text-base font-medium text-dark group-hover:text-primary dark:text-white lg:ml-8 lg:mr-0 lg:inline-flex lg:py-6 lg:pl-0 lg:pr-4 lg:text-white lg:group-hover:text-white lg:group-hover:opacity-70 xl:ml-10"
+                                                className="relative flex items-center justify-between 
+                                                py-2 mx-8 text-base font-medium text-dark 
+                                                group-hover:text-primary dark:text-white lg:ml-8 lg:mr-0 
+                                                lg:inline-flex lg:py-6 lg:pl-0 lg:pr-4 lg:text-black 
+                                                lg:group-hover:opacity-70 xl:ml-10"
                                             >
                                                 Pages
 
@@ -154,7 +167,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </div >
-            <main className="pt-24">
+            <main className="">
             <Outlet />
             </main>
         </>

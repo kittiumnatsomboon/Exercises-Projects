@@ -1,26 +1,31 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 export default function Switchdarklightmode() {
-  // button state switch mode
-  const [buttonswitchmode, setbuttonswitch] = useState(false);
   // State to track the current theme
-  const [isDarkMode, setDarkMode] = useState(() => localStorage.getItem('theme') || 'light');
-  // Add default theme to local storage if not set
-  localStorage.theme ? null : localStorage.setItem('theme', 'light');
-  // Function to toggle dark mode
-  const toggleDarkMode = (checked: boolean) => {
-    const newTheme = isDarkMode === 'light' ? 'dark' : 'light';
-    setDarkMode(newTheme);
-    localStorage.setItem('theme', newTheme);
+  const [theme, setTheme] = useState<string>(() => {
+    return localStorage.getItem("theme") || "light";
+  });
+  const toggleDarkMode = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
   };
-  // Apply dark mode styles based on local storage or system preference
-  if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    document.documentElement.classList.add('dark');
-  } else {
-    document.documentElement.classList.remove('dark');
-  }
-  // Return the DarkModeSwitch component
+
+  // apply theme
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
   return (
     <>
+      <button
+        onClick={toggleDarkMode}
+        className="loginBtn px-[22px] py-2 text-base font-medium text-white hover:opacity-70"
+      >
+        {theme === "dark" ? "Light" : "Dark"}
+      </button>
 
     </>
   );

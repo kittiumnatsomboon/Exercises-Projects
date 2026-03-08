@@ -1,8 +1,30 @@
 import Banner from "../components/banner/Banner";
 import Buttoncomponent from "../components/Formelement/Button";
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+
+// schema validate
+const Registervalidate = Yup.object({
+    fistname: Yup.string()
+    .min(2, 'Name must be at least 2 characters')
+    .required('Name is required'),
+    lastname: Yup.string()
+    .min(2, 'Name must be at least 2 characters')
+    .required('Name is required'),
+    email: Yup.string()
+        .email('Invalid email format')
+        .required('Email is required'),
+    password: Yup.string()
+        .min(8, 'Password must be at least 8 characters')
+        .required('Password is required'),
+    confirmpassword: Yup.string()
+        .min(8, 'Password must be at least 8 characters')
+        .required('Password is required'),
+});
+
 const Register = () => {
 
-    
+
     return (
         <>
             <div>
@@ -38,32 +60,68 @@ const Register = () => {
                                             />
                                         </div>
                                     </div>
-                                    <form>
-                                        <div className="mb-[22px]">
-                                            <input
-                                                type="text"
-                                                placeholder="Name"
-                                                className="w-full px-5 py-3 text-base transition bg-transparent border rounded-md outline-hidden border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 placeholder:text-dark-6 focus:border-primary dark:focus:border-primary focus-visible:shadow-none"
-                                            />
-                                        </div>
-                                        <div className="mb-[22px]">
-                                            <input
-                                                type="email"
-                                                placeholder="Email"
-                                                className="w-full px-5 py-3 text-base transition bg-transparent border rounded-md outline-hidden border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 placeholder:text-dark-6 focus:border-primary dark:focus:border-primary focus-visible:shadow-none"
-                                            />
-                                        </div>
-                                        <div className="mb-[22px]">
-                                            <input
-                                                type="password"
-                                                placeholder="Password"
-                                                className="w-full px-5 py-3 text-base transition bg-transparent border rounded-md outline-hidden border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 placeholder:text-dark-6 focus:border-primary dark:focus:border-primary focus-visible:shadow-none"
-                                            />
-                                        </div>
-                                        <div className="mb-9">
-                                            <Buttoncomponent value="สมัครสมาชิก" type="submit" id="registerid" />
-                                        </div>
-                                    </form>
+                                    <Formik
+                                        initialValues={{
+                                            fistname: '',
+                                            lastname: '',
+                                            email: '',
+                                            password: '',
+                                            confirmpassword: ''
+                                        }}
+                                        validationSchema={Registervalidate}
+                                        onSubmit={(values) => {
+                                            alert(JSON.stringify(values, null, 2));
+                                        }}
+                                    >
+                                        {({ isSubmitting }) => (
+                                            <Form>
+                                                <div className="mb-[22px]">
+                                                    <Field
+                                                        type="text"
+                                                        placeholder="กรุณาระบุชื่อ"
+                                                        name="fistname"
+                                                        className="w-full px-5 py-3 text-base transition bg-transparent border rounded-md outline-hidden border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 placeholder:text-dark-6 focus:border-primary dark:focus:border-primary focus-visible:shadow-none"
+                                                    />
+                                                </div>
+                                                <div className="mb-[22px]">
+                                                    <Field
+                                                        type="text"
+                                                        placeholder="กรุณาระบุนามสกุล"
+                                                        name="lastname"
+                                                        className="w-full px-5 py-3 text-base transition bg-transparent border rounded-md outline-hidden border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 placeholder:text-dark-6 focus:border-primary dark:focus:border-primary focus-visible:shadow-none"
+                                                    />
+                                                </div>
+                                                <div className="mb-[22px]">
+                                                    <Field
+                                                        type="email"
+                                                        placeholder="Email"
+                                                        name="email"
+                                                        className="w-full px-5 py-3 text-base transition bg-transparent border rounded-md outline-hidden border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 placeholder:text-dark-6 focus:border-primary dark:focus:border-primary focus-visible:shadow-none"
+                                                    />
+                                                </div>
+                                                <div className="mb-[22px]">
+                                                    <Field
+                                                        type="password"
+                                                        placeholder="Password"
+                                                        name="password"
+                                                        className="w-full px-5 py-3 text-base transition bg-transparent border rounded-md outline-hidden border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 placeholder:text-dark-6 focus:border-primary dark:focus:border-primary focus-visible:shadow-none"
+                                                    />
+                                                </div>
+                                                <div className="mb-[22px]">
+                                                    <Field
+                                                        type="password"
+                                                        placeholder="confirmpassword"
+                                                        name="confirmpassword"
+                                                        className="w-full px-5 py-3 text-base transition bg-transparent border rounded-md outline-hidden border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 placeholder:text-dark-6 focus:border-primary dark:focus:border-primary focus-visible:shadow-none"
+                                                    />
+                                                </div>
+                                                <div className="mb-9">
+                                                    <Buttoncomponent value="สมัครสมาชิก" type="submit" id="registerid" />
+                                                </div>
+
+                                            </Form>
+                                        )}
+                                    </Formik>
                                     <span className="relative block text-center z-1 mb-7">
                                         <span
                                             className="absolute left-0 block w-full h-px -z-1 top-1/2 bg-stroke dark:bg-dark-3"

@@ -8,6 +8,7 @@ import About from './Pages/About';
 import Contact from './Pages/Contact';
 import Navbar from './components/Navbar';
 import Login from './Pages/Login';
+import Register from './Pages/Register';
 
 
 
@@ -21,6 +22,7 @@ createRoot(document.getElementById('root')!).render(
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
           </Route>
         </Routes>
       </BrowserRouter>

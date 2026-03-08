@@ -150,13 +150,13 @@ const Navbar = () => {
                                 </button>
                                 <div className="hidden sm:flex">
                                     <Link
-                                        to="#"
+                                        to="/login"
                                         className="loginBtn px-[22px] py-2 text-base font-medium dark:text-white hover:opacity-70"
                                     >
                                         เข้าสู่ระบบ
                                     </Link>
                                     <Link
-                                        to="#"
+                                        to="/register"
                                         className="px-6 py-2 text-base font-medium dark:text-white dark:bg-white/20 duration-300 ease-in-out rounded-md bg-black/20 signUpBtn hover:bg-white/100 hover:text-dark"
                                     >
                                         สมัครสมาชิก

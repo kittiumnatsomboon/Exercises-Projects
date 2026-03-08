@@ -1,10 +1,10 @@
-const Login = () =>{
+const Register = () =>{
     return(
         <>
         <div className="pt-24">
-        เข้าสู่ระบบ
+        สมัครสมาชิก
         </div>
         </>
     )
 }
-export default Login;
+export default Register;

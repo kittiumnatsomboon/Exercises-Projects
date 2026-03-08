@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Banner from "../components/banner/Banner";
 import Buttoncomponent from "../components/Formelement/Button";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -6,25 +7,36 @@ import * as Yup from 'yup';
 // schema validate
 const Registervalidate = Yup.object({
     fistname: Yup.string()
-    .min(2, 'Name must be at least 2 characters')
-    .required('Name is required'),
+    .min(2, 'ความยาวของอักษรขั้นต่ำ 2 ตัวอักษร')
+    .required('กรุณาระบุชื่อ'),
     lastname: Yup.string()
-    .min(2, 'Name must be at least 2 characters')
-    .required('Name is required'),
+    .min(2, 'ความยาวของอักษรขั้นต่ำ 2 ตัวอักษร')
+    .required('กรุณาระบุนามสกุล'),
     email: Yup.string()
-        .email('Invalid email format')
-        .required('Email is required'),
+        .email('รูปแบบอีเมลล์ผิดพลาด')
+        .required('กรุณาระบุอีเมลล์แอดเดรส'),
     password: Yup.string()
-        .min(8, 'Password must be at least 8 characters')
-        .required('Password is required'),
+        .min(8, 'รหัสผ่านขั้นต่ำ 8 ตัวอักษร')
+        .required('กรุณาระบุรหัสผ่าน')
+        .matches(/[a-z]/, 'รหัสผ่านต้องมีตัวอักษรตัวเล็ก')
+        .matches(/[A-Z]/, 'รหัสผ่านต้องมีตัวอักษรตัวใหญ่')
+        .matches(/[0-9]/, 'รหัสผ่านประกอบด้วยตัวเลข')
+        .matches(/[^a-zA-Z0-9]/, 'รหัสผ่านประกอบด้วยอักษรพิเศษ')
+        ,
     confirmpassword: Yup.string()
-        .min(8, 'Password must be at least 8 characters')
-        .required('Password is required'),
+        .min(8, 'รหัสผ่านขั้นต่ำ 8 ตัวอักษร')
+        .required('กรุณาระบุรหัสผ่านอกครั้ง')
+        .matches(/[a-z]/, 'รหัสผ่านต้องมีตัวอักษรตัวเล็ก')
+        .matches(/[A-Z]/, 'รหัสผ่านต้องมีตัวอักษรตัวใหญ่')
+        .matches(/[0-9]/, 'รหัสผ่านประกอบด้วยตัวเลข')
+        .matches(/[^a-zA-Z0-9]/, 'รหัสผ่านประกอบด้วยอักษรพิเศษ')
+        .oneOf([Yup.ref('password')], 'รหัสผ่านต้องตรงกัน')
+        ,
 });
 
 const Register = () => {
 
-
+    const[message , setmessage] = useState<string>("");
     return (
         <>
             <div>
@@ -70,7 +82,7 @@ const Register = () => {
                                         }}
                                         validationSchema={Registervalidate}
                                         onSubmit={(values) => {
-                                            alert(JSON.stringify(values, null, 2));
+                                            console.log(JSON.stringify(values, null, 2));
                                         }}
                                     >
                                         {({ isSubmitting }) => (
@@ -82,6 +94,7 @@ const Register = () => {
                                                         name="fistname"
                                                         className="w-full px-5 py-3 text-base transition bg-transparent border rounded-md outline-hidden border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 placeholder:text-dark-6 focus:border-primary dark:focus:border-primary focus-visible:shadow-none"
                                                     />
+                                                    <ErrorMessage component="div" name="fistname" className="text-red-500"/>
                                                 </div>
                                                 <div className="mb-[22px]">
                                                     <Field
@@ -90,6 +103,7 @@ const Register = () => {
                                                         name="lastname"
                                                         className="w-full px-5 py-3 text-base transition bg-transparent border rounded-md outline-hidden border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 placeholder:text-dark-6 focus:border-primary dark:focus:border-primary focus-visible:shadow-none"
                                                     />
+                                                    <ErrorMessage component="div" name="lastname" className="text-red-500"/>
                                                 </div>
                                                 <div className="mb-[22px]">
                                                     <Field
@@ -98,6 +112,7 @@ const Register = () => {
                                                         name="email"
                                                         className="w-full px-5 py-3 text-base transition bg-transparent border rounded-md outline-hidden border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 placeholder:text-dark-6 focus:border-primary dark:focus:border-primary focus-visible:shadow-none"
                                                     />
+                                                    <ErrorMessage component="div" name="email" className="text-red-500"/>
                                                 </div>
                                                 <div className="mb-[22px]">
                                                     <Field
@@ -106,6 +121,7 @@ const Register = () => {
                                                         name="password"
                                                         className="w-full px-5 py-3 text-base transition bg-transparent border rounded-md outline-hidden border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 placeholder:text-dark-6 focus:border-primary dark:focus:border-primary focus-visible:shadow-none"
                                                     />
+                                                    <ErrorMessage component="div" name="password" className="text-red-500"/>
                                                 </div>
                                                 <div className="mb-[22px]">
                                                     <Field
@@ -114,6 +130,7 @@ const Register = () => {
                                                         name="confirmpassword"
                                                         className="w-full px-5 py-3 text-base transition bg-transparent border rounded-md outline-hidden border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 placeholder:text-dark-6 focus:border-primary dark:focus:border-primary focus-visible:shadow-none"
                                                     />
+                                                    <ErrorMessage component="div" name="confirmpassword" className="text-red-500"/>
                                                 </div>
                                                 <div className="mb-9">
                                                     <Buttoncomponent value="สมัครสมาชิก" type="submit" id="registerid" />

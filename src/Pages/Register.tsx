@@ -1,7 +1,8 @@
 import Banner from "../components/banner/Banner";
 import Buttoncomponent from "../components/Formelement/Button";
-
 const Register = () => {
+
+    
     return (
         <>
             <div>

@@ -1,4 +1,5 @@
 type ButtonType = 'button' | 'submit' | 'reset';
+type even = 'onclick' | ''
 interface typecomponent {
     type?:ButtonType
     value: string

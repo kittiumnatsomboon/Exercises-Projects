@@ -1,4 +1,5 @@
 import Banner from "../components/banner/Banner";
+import Buttoncomponent from "../components/Formelement/Button";
 
 const Register = () => {
     return (
@@ -10,6 +11,7 @@ const Register = () => {
                     menu="เข้าสู่ระบบ"
                     href="/login"
                 />
+                {/* Section form component */}
                 <section className="bg-white  py-14 lg:py-[90px] dark:bg-black">
                     <div className="container mx-auto px-4">
                         <div className="flex flex-wrap -mx-4">
@@ -58,13 +60,7 @@ const Register = () => {
                                             />
                                         </div>
                                         <div className="mb-9">
-                                            <input
-                                                type="submit"
-                                                value="สมัครสมาชิก"
-                                                className="w-full px-5 py-3 text-base text-white transition 
-                                                duration-300 ease-in-out border rounded-md 
-                                                cursor-pointer border-primary bg-blue-500 hover:bg-blue-600"
-                                            />
+                                            <Buttoncomponent value="สมัครสมาชิก" type="submit" id="registerid" />
                                         </div>
                                     </form>
                                     <span className="relative block text-center z-1 mb-7">
@@ -134,28 +130,10 @@ const Register = () => {
                                             </a>
                                         </li>
                                     </ul>
-
-                                    <p className="mb-4 text-base text-body-secondary">
-                                        By creating an account you are agree with our
-                                        <a
-                                            href="javascript:void(0)"
-                                            className="text-primary hover:underline"
-                                        >
-                                            Privacy
-                                        </a>
-                                        and
-                                        <a
-                                            href="javascript:void(0)"
-                                            className="text-primary hover:underline"
-                                        >
-                                            Policy
-                                        </a>
-                                    </p>
-
                                     <p className="text-base text-body-secondary">
-                                        Already have an account?
-                                        <a href="signin.html" className="text-primary hover:underline">
-                                            Sign In
+                                        คุณมีบัญชีแล้ว?
+                                        <a href="/login" className="text-primary hover:underline">
+                                            เข้าสู่ระบบ
                                         </a>
                                     </p>
 

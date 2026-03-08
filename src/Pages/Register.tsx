@@ -3,15 +3,15 @@ import Banner from "../components/banner/Banner";
 import Buttoncomponent from "../components/Formelement/Button";
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-
+import { Authregister } from "../authentication/Registerauth";
 // schema validate
 const Registervalidate = Yup.object({
     fistname: Yup.string()
-    .min(2, 'ความยาวของอักษรขั้นต่ำ 2 ตัวอักษร')
-    .required('กรุณาระบุชื่อ'),
+        .min(2, 'ความยาวของอักษรขั้นต่ำ 2 ตัวอักษร')
+        .required('กรุณาระบุชื่อ'),
     lastname: Yup.string()
-    .min(2, 'ความยาวของอักษรขั้นต่ำ 2 ตัวอักษร')
-    .required('กรุณาระบุนามสกุล'),
+        .min(2, 'ความยาวของอักษรขั้นต่ำ 2 ตัวอักษร')
+        .required('กรุณาระบุนามสกุล'),
     email: Yup.string()
         .email('รูปแบบอีเมลล์ผิดพลาด')
         .required('กรุณาระบุอีเมลล์แอดเดรส'),
@@ -22,7 +22,7 @@ const Registervalidate = Yup.object({
         .matches(/[A-Z]/, 'รหัสผ่านต้องมีตัวอักษรตัวใหญ่')
         .matches(/[0-9]/, 'รหัสผ่านประกอบด้วยตัวเลข')
         .matches(/[^a-zA-Z0-9]/, 'รหัสผ่านประกอบด้วยอักษรพิเศษ')
-        ,
+    ,
     confirmpassword: Yup.string()
         .min(8, 'รหัสผ่านขั้นต่ำ 8 ตัวอักษร')
         .required('กรุณาระบุรหัสผ่านอกครั้ง')
@@ -31,12 +31,12 @@ const Registervalidate = Yup.object({
         .matches(/[0-9]/, 'รหัสผ่านประกอบด้วยตัวเลข')
         .matches(/[^a-zA-Z0-9]/, 'รหัสผ่านประกอบด้วยอักษรพิเศษ')
         .oneOf([Yup.ref('password')], 'รหัสผ่านต้องตรงกัน')
-        ,
+    ,
 });
 
 const Register = () => {
 
-    const[message , setmessage] = useState<string>("");
+    const [message, setmessage] = useState<string>("");
     return (
         <>
             <div>
@@ -82,7 +82,14 @@ const Register = () => {
                                         }}
                                         validationSchema={Registervalidate}
                                         onSubmit={(values) => {
-                                            console.log(JSON.stringify(values, null, 2));
+                                            // ส่งข้อมูลเข้า authregister เพื่อทำ api ส่งไป backend
+                                            const newuser = new Authregister(
+                                                values.fistname,
+                                                values.lastname,
+                                                values.password,
+                                                values.confirmpassword
+                                            );
+                                            newuser.apiregister();
                                         }}
                                     >
                                         {({ isSubmitting }) => (
@@ -94,7 +101,7 @@ const Register = () => {
                                                         name="fistname"
                                                         className="w-full px-5 py-3 text-base transition bg-transparent border rounded-md outline-hidden border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 placeholder:text-dark-6 focus:border-primary dark:focus:border-primary focus-visible:shadow-none"
                                                     />
-                                                    <ErrorMessage component="div" name="fistname" className="text-red-500"/>
+                                                    <ErrorMessage component="div" name="fistname" className="text-red-500" />
                                                 </div>
                                                 <div className="mb-[22px]">
                                                     <Field
@@ -103,7 +110,7 @@ const Register = () => {
                                                         name="lastname"
                                                         className="w-full px-5 py-3 text-base transition bg-transparent border rounded-md outline-hidden border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 placeholder:text-dark-6 focus:border-primary dark:focus:border-primary focus-visible:shadow-none"
                                                     />
-                                                    <ErrorMessage component="div" name="lastname" className="text-red-500"/>
+                                                    <ErrorMessage component="div" name="lastname" className="text-red-500" />
                                                 </div>
                                                 <div className="mb-[22px]">
                                                     <Field
@@ -112,7 +119,7 @@ const Register = () => {
                                                         name="email"
                                                         className="w-full px-5 py-3 text-base transition bg-transparent border rounded-md outline-hidden border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 placeholder:text-dark-6 focus:border-primary dark:focus:border-primary focus-visible:shadow-none"
                                                     />
-                                                    <ErrorMessage component="div" name="email" className="text-red-500"/>
+                                                    <ErrorMessage component="div" name="email" className="text-red-500" />
                                                 </div>
                                                 <div className="mb-[22px]">
                                                     <Field
@@ -121,7 +128,7 @@ const Register = () => {
                                                         name="password"
                                                         className="w-full px-5 py-3 text-base transition bg-transparent border rounded-md outline-hidden border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 placeholder:text-dark-6 focus:border-primary dark:focus:border-primary focus-visible:shadow-none"
                                                     />
-                                                    <ErrorMessage component="div" name="password" className="text-red-500"/>
+                                                    <ErrorMessage component="div" name="password" className="text-red-500" />
                                                 </div>
                                                 <div className="mb-[22px]">
                                                     <Field
@@ -130,7 +137,7 @@ const Register = () => {
                                                         name="confirmpassword"
                                                         className="w-full px-5 py-3 text-base transition bg-transparent border rounded-md outline-hidden border-stroke dark:border-dark-3 text-body-color dark:text-dark-6 placeholder:text-dark-6 focus:border-primary dark:focus:border-primary focus-visible:shadow-none"
                                                     />
-                                                    <ErrorMessage component="div" name="confirmpassword" className="text-red-500"/>
+                                                    <ErrorMessage component="div" name="confirmpassword" className="text-red-500" />
                                                 </div>
                                                 <div className="mb-9">
                                                     <Buttoncomponent value="สมัครสมาชิก" type="submit" id="registerid" />
